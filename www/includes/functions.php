@@ -39,7 +39,7 @@
 
         $stmt = $dbconn->prepare("SELECT email FROM admin WHERE :e=email");
 
-        $stmt->bindParam(":e" -> $email);
+        $stmt->bindParam(":e", $email);
         $stmt->execute();
 
         $count = $stmt->rowCount();
