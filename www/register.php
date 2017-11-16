@@ -2,6 +2,7 @@
 
     $page_title = "Register";
     include("includes/header.php");
+    include("includes/db.php");
 
 ?>
 
@@ -31,7 +32,19 @@
         }
 
         if(empty($errors)) {
-            //do database work
+            
+            $clean = array_map('trim', $_POST);
+
+            $hash = password_hash($clean['password'], PASSWORD_BCRYPT);
+
+            $stmt =  $conn->prepare("INSERT INTO admin(firstName, lastName, email, hash) VALUES(:f, :l, :e, :h)");
+
+            $data = [                       //binding of data
+                ":f" => $clean['fname'],
+                ":l" => $clean['lname'],
+                ":e" => $clean['email'],
+                ":h" => $hash
+            ];
         }
     }
 ?>
