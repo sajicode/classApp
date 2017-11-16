@@ -1,35 +1,24 @@
 <?php
 
+    include("functions/function.php");
+
     define('MAX_FILE_SIZE', '2097152');
     $ext = ['image/jpg', 'image/jpeg', 'image/png'];
 
     if(array_key_exists('save', $_POST)) {
         //print_r($_FILES);
 
-        $errors = array();
+        $errors = array();      //initialize error array
 
-        if(empty($_FILES['pics']['name'])) {
+        $name = $_FILES['pics']['name'];
+        $size = $_FILES['pics']['size'];
 
-            $errors[] = "Please select a file";
-        }
+        $tmp_name = $_FILES['pics']['tmp_name'];
 
-        if($_FILES['pics']['size'] > MAX_FILE_SIZE) {
-            $errors[] = "File too large. Maximum: ".MAX_FILE_SIZE;
-            $_FILES['pics']['tmp_name'] = null;
-        }
+        $file = picUpload($name, $size, $tmp_name);
 
-        if(!in_array($_FILES['pics']['type'], $ext)) {
+        if(!in_array($_FILES['pics']['type'], $ext)) {   //validates for extension
             $errors[] = "File format not supported";
-        }
-
-        $rnd = rand(0000000000, 9999999999);
-        $strip_name = str_replace(' ', '_', $_FILES['pics']['name']);
-
-        $filename = $rnd.$strip_name; //this helps to make each uploaded file unique
-        $destination = './uploads/'.$filename;
-
-        if(!move_uploaded_file($_FILES['pics']['tmp_name'], $destination)) {
-            $errors[] = "File not uploaded";     //validates for if file is moved
         }
 
         if(empty($errors)) {
