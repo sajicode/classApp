@@ -11,31 +11,27 @@
         $errors = array();
 
         if(empty($_POST['fname'])) {
-            $errors[] = "Please enter your firstname";
+            $errors['fname'] = "Please enter your firstname";
         }
         
         if(empty($_POST['lname'])) {
-            $errors[] = "Please enter your lastname";
+            $errors['lname'] = "Please enter your lastname";
         }
 
         if(empty($_POST['email'])) {
-            $errors[] = "Please enter your email";
+            $errors['email'] = "Please enter your email";
         }
 
         if(empty($_POST['password'])) {
-            $errors[] = "Please enter your password";
+            $errors['password'] = "Please enter your password";
         }
 
         if(empty($_POST['pword'])) {
-            $errors[] = "Please confirm your password";
+            $errors['pword'] = "Please confirm your password";
         }
 
         if(empty($errors)) {
             //do database work
-        } else {
-            foreach($errors as $err) {
-                echo $err.'<br/>';
-            }
         }
     }
 ?>
@@ -45,24 +41,29 @@
 		<hr>
 		<form id="register"  action ="register.php" method ="POST">
 			<div>
+                <?php if(isset($errors['fname'])) { echo '<span class=err>'.$errors['fname'].'</span>'; } ?>
 				<label>first name:</label>
 				<input type="text" name="fname" placeholder="first name">
 			</div>
 			<div>
+                <?php if(isset($errors['lname'])) { echo '<span class=err>'.$errors['lname'].'</span>'; } ?>
 				<label>last name:</label>	
 				<input type="text" name="lname" placeholder="last name">
 			</div>
 
 			<div>
+                <?php if(isset($errors['email'])) { echo '<span class=err>'.$errors['email'].'</span>'; } ?>
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
 			</div>
 			<div>
+                <?php if(isset($errors['password'])) { echo '<span class=err>'.$errors['password'].'</span>'; } ?>
 				<label>password:</label>
 				<input type="password" name="password" placeholder="password">
 			</div>
  
 			<div>
+                <?php if(isset($errors['pword'])) { echo '<span class=err>'.$errors['pword'].'</span>'; } ?>
 				<label>confirm password:</label>	
 				<input type="password" name="pword" placeholder="password">
 			</div>
