@@ -62,4 +62,21 @@
         return $result;
     }
 
+    function validateLogin($dbconn, $email, $password) {
+        $result = false;
+
+        $stmt = $dbconn->prepare("SELECT email, hash FROM admin WHERE :e=email AND :p=hash");
+
+        $stmt->bindParam(":e", $email);
+        $stmt->bindParam(":p", $password);
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+
+        if($count == 1) {
+            $result = true;
+        }
+        return $result;
+    }
+
 ?>

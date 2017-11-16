@@ -10,16 +10,16 @@
 
 		$error = [];
 
-		if(empty($_FILES['pics']['name'])) {
+		if(empty($_FILES['pics']['name'])) {      //validate for file selection
 			$error[] = "Please select a file";
 		}
 
-		if ($_FILES['pics']['size'] > MAX_FILE_SIZE) {
+		if ($_FILES['pics']['size'] > MAX_FILE_SIZE) {             //validate for file size
 			$error[] = "File too large. Maximum: ". MAX_FILE_SIZE;
 			$_FILES['pics']['tmp_name'] = null;
 		}
 
-		if(!in_array($_FILES['pics']['type'], $ext)) {
+		if(!in_array($_FILES['pics']['type'], $ext)) {         //validate for file extension
 			$error[] = "File format not supported";
 		}
 
