@@ -45,6 +45,8 @@
                 ":e" => $clean['email'],
                 ":h" => $hash
             ];
+
+            $stmt->execute($data);
         }
     }
 ?>
