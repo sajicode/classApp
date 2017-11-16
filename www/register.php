@@ -5,6 +5,41 @@
 
 ?>
 
+<?php
+
+    if(array_key_exists('register', $_POST)) {
+        $errors = array();
+
+        if(empty($_POST['fname'])) {
+            $errors[] = "Please enter your firstname";
+        }
+        
+        if(empty($_POST['lname'])) {
+            $errors[] = "Please enter your lastname";
+        }
+
+        if(empty($_POST['email'])) {
+            $errors[] = "Please enter your email";
+        }
+
+        if(empty($_POST['password'])) {
+            $errors[] = "Please enter your password";
+        }
+
+        if(empty($_POST['pword'])) {
+            $errors[] = "Please confirm your password";
+        }
+
+        if(empty($errors)) {
+            //do database work
+        } else {
+            foreach($errors as $err) {
+                echo $err.'<br/>';
+            }
+        }
+    }
+?>
+
 <div class="wrapper">
 		<h1 id="register-label">Register</h1>
 		<hr>
