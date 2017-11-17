@@ -63,20 +63,46 @@
     }
 
     function validateLogin($dbconn, $email, $password) {
-        $result = false;
+        $result = "";
 
-        $stmt = $dbconn->prepare("SELECT email, hash FROM admin WHERE :e=email AND :p=hash");
+        $stmt = $dbconn->prepare("SELECT * FROM admin WHERE :e=email");
 
         $stmt->bindParam(":e", $email);
-        $stmt->bindParam(":p", $password);
         $stmt->execute();
 
-        $count = $stmt->rowCount();
+        while($result=$stmt->fetch(PDO::FETCH_ASSOC)) {
+            //print_r($result);
+            $hash = $result['hash'];
+            if(password_verify($password, $hash)) {
+                $result=true;
+            } else {
+                $result=false;
+            }
+            return $result;
+
+            
+            /* $hash = $result['hash'];
+            
+            $stmt2 = $dbconn->prepare("SELECT * FROM admin WHERE :p=$hash");
+            $hashed = password_verify($password, $hash);
+            $stmt2->bindParam(":p", $hashed);
+            $stmt2->execute();
+ */
+        }
+
+        //$stmt2 = $stmt->fetchAll();
+        //print_r($stmt2['firstName']);
+
+        /* $count = $stmt->rowCount();
 
         if($count == 1) {
+
             $result = true;
+        } else{
+            $result = false;
         }
-        return $result;
+        return $result;*/
     }
+ 
 
 ?>

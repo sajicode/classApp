@@ -26,6 +26,9 @@
 
 			if(validateLogin($conn, $_POST['email'], $_POST['password'])) {
 				header("location:view.php");
+				//echo "Hello";
+			} else {
+				echo "Wrong email/password";
 			}
 		}
 	}
