@@ -41,6 +41,8 @@
             $clean = array_map('trim', $_POST);
 
             doAdminRegister($conn, $clean);
+
+            echo "Registration successful";
         }
     }
 ?>
