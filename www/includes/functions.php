@@ -205,20 +205,7 @@
         return $result;
     }
 
-    function category($dbconn, $input) {
-
-        $stmt=$dbconn->prepare("SELECT * FROM category WHERE catgeory_name=:catName");
-
-        $stmt->bindParam(":catName", $input['category_name']);
-
-        $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_BOTH);
-
-        return $row;
-    }
-
-    function addProduct($dbconn, $input, $row) {
+    function addProduct($dbconn, $input, $id) {
 
         $stmt = $dbconn->prepare("INSERT INTO books(title, author, price, publication_date, quantity, category_id) VALUES(:t,:a,:p,:pD,:q,:cId)");
 
@@ -228,7 +215,7 @@
             ":p" => $input['price'],
             ":pD" => $input['pub_date'],
             ":q" => $input['quantity'],
-            ":cId" => $row['category_id']
+            ":cId" => $id
         ];
 
         $stmt->execute($data);
