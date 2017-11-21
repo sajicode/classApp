@@ -159,6 +159,19 @@
         }
         return $result;
     }
+
+    function getCategoryById($dbconn, $id) {
+
+        $stmt = $dbconn->prepare("SELECT * FROM category WHERE category_id=:catId");
+
+        $stmt->bindParam(':catId', $id);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_BOTH);
+
+        return $row;
+    }
  
 
 ?>

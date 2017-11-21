@@ -24,7 +24,7 @@
 
             addCategory($conn, $clean);
 
-            header("location:view_category.php");
+            redirect("view_category.php");
         }
     }
 
