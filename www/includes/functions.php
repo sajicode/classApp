@@ -193,6 +193,47 @@
             echo 'class="selected"';
         }
     }
+
+    function numeric($input) {
+
+        $result = false;
+
+        if(!is_numeric($input)) {
+
+            $result = true;
+        }
+        return $result;
+    }
+
+    function category($dbconn, $input) {
+
+        $stmt=$dbconn->prepare("SELECT * FROM category WHERE catgeory_name=:catName");
+
+        $stmt->bindParam(":catName", $input['category_name']);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_BOTH);
+
+        return $row;
+    }
+
+    function addProduct($dbconn, $input, $row) {
+
+        $stmt = $dbconn->prepare("INSERT INTO books(title, author, price, publication_date, quantity, category_id) VALUES(:t,:a,:p,:pD,:q,:cId)");
+
+        $data = [
+            ":t" => $input['title'],
+            ":a" => $input['author'],
+            ":p" => $input['price'],
+            ":pD" => $input['pub_date'],
+            ":q" => $input['quantity'],
+            ":cId" => $row['category_id']
+        ];
+
+        $stmt->execute($data);
+    } 
+
  
 
 ?>
