@@ -172,6 +172,27 @@
 
         return $row;
     }
+
+    function updateCategory($dbconn, $input) {
+
+        $stmt = $dbconn->prepare("UPDATE category SET category_name=:catName WHERE category_id=:catId");
+
+        $data = [
+            ":catName" => $input['cat_name'],
+            ":catId" => $input['id']
+        ];
+
+        $stmt->execute($data);
+    }
+
+    function curNave($page) {
+
+        $curPage = basename($_SERVER['SCRIPT_FILENAME']);
+
+        if($curPage == $page) {
+            echo 'class="selected"';
+        }
+    }
  
 
 ?>
