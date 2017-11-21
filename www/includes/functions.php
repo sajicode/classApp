@@ -103,6 +103,27 @@
         }
         return $result;*/
     }
+
+    function adminLogin($dbconn, $input) {
+
+        $result = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM admin WHERE email=:e");
+
+        $stmt->bindParam(':e', $input['email']);
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+        $row = $stmt->fetch(PDO::FETCH_BOTH);
+
+        if($count != 1 || !password_verify($input['password'], $row['hash'])) {
+            $result[] = false;
+        } else {
+            $result[] = true;
+            $result[] = $row;
+        }
+        return $result;
+    }
  
 
 ?>

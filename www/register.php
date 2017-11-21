@@ -36,6 +36,10 @@
             $errors['pword'] = "Please confirm your password";
         }
 
+        if($_POST['password'] != $_POST['pword']) {
+            $errors['pword'] = "Please enter the correct password";
+        }
+
         if(empty($errors)) {
             
             $clean = array_map('trim', $_POST);

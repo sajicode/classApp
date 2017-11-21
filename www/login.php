@@ -1,5 +1,6 @@
 <?php
 
+	session_start();
 	$page_title = "Login";
 	
 	include("includes/header.php");
@@ -18,18 +19,33 @@
 
 		if(empty($_POST['password'])) {
 			$error['password'] = "Please enter your password";
+		} else {
+			$msg = "Invalid email/password";
+			header("location:login.php?msg=$msg");
 		}
 
 		if(empty($errors)) {
 
-			//$clean = array_map('trim', $_POST);
+			$clean = array_map('trim', $_POST);
 
-			if(validateLogin($conn, $_POST['email'], $_POST['password'])) {
-				header("location:view.php");
+			$data = adminLogin($conn, $_POST);
+
+			if($data[0]) {
+
+				$details = $data[1];
+
+				$_SESSION['aid'] = $details['admin_id'];
+				$_SESSION['name'] = $details['firstName'].' '.$details['lastName'];
+
+				header("location:test.php");
+			}
+
+			/* if(validateLogin($conn, $_POST['email'], $_POST['password'])) {
+				header("location:sandview.php");
 				//echo "Hello";
 			} else {
 				echo "Wrong email/password";
-			}
+			} */
 		}
 	}
 
