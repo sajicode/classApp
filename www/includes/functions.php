@@ -124,6 +124,15 @@
         }
         return $result;
     }
+
+    function addCategory($dbconn, $input) {
+
+        $stmt = $dbconn->prepare("INSERT INTO category(category_name) VALUES(:catName)");
+
+        $stmt->bindParam(':catName', $input['cat_name']);
+
+        $stmt->execute();
+    }
  
 
 ?>
