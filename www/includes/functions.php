@@ -133,6 +133,16 @@
 
         $stmt->execute();
     }
+
+    function checkLogin() {
+        if(!isset($_SESSION['aid'])) {
+            header("location:login.php");
+        }
+    }
+
+    function redirect($location, $msg) {
+        header("location: ".$location.$msg);
+    }
  
 
 ?>

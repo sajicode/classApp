@@ -28,7 +28,7 @@
 
 			$clean = array_map('trim', $_POST);
 
-			$data = adminLogin($conn, $_POST);
+			$data = adminLogin($conn, $clean);
 
 			if($data[0]) {
 
@@ -37,7 +37,10 @@
 				$_SESSION['aid'] = $details['admin_id'];
 				$_SESSION['name'] = $details['firstName'].' '.$details['lastName'];
 
-				header("location:test.php");
+				header("location:add_category.php");
+			} else {
+				$message = "Invalid email/password";
+				header("location.php?mess=$message");
 			}
 
 			/* if(validateLogin($conn, $_POST['email'], $_POST['password'])) {

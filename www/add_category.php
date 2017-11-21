@@ -1,11 +1,15 @@
 <?php
 
+    session_start();
+
     $page_title = "Admin Dashboard";
 
     include("includes/dashboard_header.php");
     include("includes/footer.php");
     include("includes/db.php");
     include("includes/functions.php");
+
+    checkLogin();
 
     $errors = [];
 
