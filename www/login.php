@@ -24,7 +24,7 @@
 			header("location:login.php?msg=$msg");
 		}
 
-		if(empty($errors)) {
+		if(empty($error)) {
 
 			$clean = array_map('trim', $_POST);
 
