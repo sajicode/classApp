@@ -177,7 +177,7 @@
         }
     }
 
-    function numeric($input) {
+    /*function numeric($input) {
 
         $result = false;
 
@@ -188,7 +188,7 @@
         return $result;
     }
 
-    /* function addProduct($dbconn, $input) {
+     function addProduct($dbconn, $input) {
 
         $stmt = $dbconn->prepare("INSERT INTO books(title, author, price, publication_date, quantity, category_id) VALUES(:t,:a,:p,:pD,:q,:cId)");
 
