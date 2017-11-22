@@ -11,7 +11,10 @@
 
         if(move_uploaded_file($files[$name]['tmp_name'], $destination)) {
             $result[] = true;
+            $result[] = $destination;
+
         } else {
+
             $result[] = false;
         }
 
@@ -185,7 +188,7 @@
         return $result;
     }
 
-    function addProduct($dbconn, $input) {
+    /* function addProduct($dbconn, $input) {
 
         $stmt = $dbconn->prepare("INSERT INTO books(title, author, price, publication_date, quantity, category_id) VALUES(:t,:a,:p,:pD,:q,:cId)");
 
@@ -199,7 +202,7 @@
         ];
 
         $stmt->execute($data);
-    }
+    } */
     
     function deleteCategory($dbconn, $id) {
 
@@ -208,6 +211,63 @@
         $stmt->bindParam(":catId", $id);
 
         $stmt->execute();
+    }
+
+    function fetchCategory($dbconn, $val=null) {
+
+        $result = "";
+
+        $stmt = $dbconn->prepare("SELECT * FROM category");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $result .= '<option value ="'.$row[0].'">'.$row[1].'</option>';
+
+        }
+        return $result;
+    }
+
+    function addProducts($dbconn, $input) {
+
+        $stmt = $dbconn->prepare("INSERT INTO books(title, author, price, publication_date, category_id, flag, img_path)
+                                VALUES(:t,:a,:p,:pub,:cat,:fl,:img)");
+
+        $data = [
+            ":t"=> $input['title'],
+            ":a"=> $input['author'],
+            ":p"=> $input['price'],
+            ":pub" => $input['year'],
+            ":cat" => $input['cat'],
+            ":fl" => $input['flag'],
+            ":img" => $input['dest']
+        ];
+
+        $stmt->execute($data);
+                                
+    }
+
+    function viewProducts($dbconn) {
+
+        $result = "";
+
+        $stmt = $dbconn->prepare("SELECT * FROM books");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $result .= '<tr><td>'.$row[1].'</td>';
+            $result .= '<td>'.$row[2].'</td>';
+            $result .= '<td>'.$row[3].'</td>';
+            $result .= '<td>'.$row[5].'</td>';
+            $result .= '<td><img src="'.$row[7].'"height="50" width="50"></td>';
+            $result .= '<td><a href="edit_products.php?book_id='.$row[0].'">edit</a></td>';
+            $result .= '<td><a href="delete_products.php?book_id='.$row[0].'">delete</a></td></tr>';
+
+        }
+        return $result;
     }
 
  
