@@ -1,140 +1,93 @@
 <?php
 
-    session_start();
+	$page_title = "Admin Dashboard";
 
-    $page_title = "Admin || Add Product";
-
-    include("includes/db.php");
+	include("includes/db.php");
     include("includes/functions.php");
-    include("includes/dashboard_header.php");
-
-    checkLogin();
+	include("includes/dashboard_header.php");
 
 	$errors = [];
 
-	$stmt = $conn->prepare("SELECT * FROM category");
-
-	$stmt->execute();
-	
-	if(array_key_exists('add_product', $_POST)) {
-
-		if(empty($_POST['title'])) {
-			$errors['title'] = "Enter the book title";
-		}
-
-		if(empty($_POST['author'])) {
-			$errors['author'] = "Enter the book author";
-		}
-
-		$clean = array_map('trim', $_POST);
-
-		if(empty($_POST['price'])) {
-			$errors['price'] = "Enter the book price";
-		} else {
-
-			$price = numeric($clean['price']);
-
-			if($price) {
-				echo "Enter price in digits";
-			}
-		}
-
-		if(empty($_POST['pub_date'])) {
-			$errors['pub_date'] = "Select the date of publication";
-		}
-
-		if(empty($_POST['quantity'])) {
-			$errors['quantity'] = "Enter the quantity available";
-		} else {
-
-			$quantity = numeric($clean['quantity']);
-			if($quantity) {
-				echo "Enter quantity in digits";
-			}
-
-		}
-
-		if(empty($_POST['cat_name'])) {
-			$errors['catname'] = "Select a category";
-		}
-
-		if(empty($errors)) {
-			
-			$row = $stmt->fetch(PDO::FETCH_BOTH);
-			//$data = categoryId($conn, $clean['cat_name']);
-			$cat_id = $row[0];
-
-			addProduct($conn, $_POST, $cat_id);
-
-			redirect("add_category.php");
-
-		}
-
-
-	}
+	$flag = ['Top-Selling', 'Trending', 'Recently-Viewed'];
 
 ?>
 
 <div class="wrapper">
-    <div id="stream">
-        <form id="register"  action ="add_products.php" method ="POST">
+		<hr>
+		<form id="register"  action ="add_products.php" method ="POST">
 			<div>
-				<?php  
-					$info = displayErrors($errors, 'title');
-					echo $info;
-				?>
+                <?php 
+                    $title = displayErrors($errors, 'title');
+                    echo $title;
+                ?>
 				<label>Title:</label>
-				<input type="text" name="title" placeholder="book title">
-            </div>
-            <div>
-				<?php  
-					$info = displayErrors($errors, 'author');
-					echo $info;
-				?>
-				<label>Author:</label>
-				<input type="text" name="author" placeholder="book author">
-            </div>
-            <div>
-				<?php  
-					$info = displayErrors($errors, 'price');
-					echo $info;
-				?>
-				<label>Price:</label>
-				<input type="text" name="price" placeholder="book price">
-            </div>
-            <div>
-				<?php  
-					$info = displayErrors($errors, 'pub_date');
-					echo $info;
-				?>
-				<label>Publication Date:</label>
-				<input type="date" name="pub_date" placeholder="date of publication">
-            </div>
-            <div>
-				<?php  
-					$info = displayErrors($errors, 'quantity');
-					echo $info;
-
-				?>
-				<label>Quantity:</label>
-				<input type="text" name="quantity" placeholder="quantity">
-            </div>
+				<input type="text" name="title" placeholder="title">
+			</div>
 			<div>
-				<label>Category: </label><select name="cat_name">
-								<option value="">Select Category</option>
-								<?php while($row = $stmt->fetch(PDO::FETCH_BOTH)) { ?>
-								<option value="<?php echo $row['category_name']; ?>"><?php echo $row['category_name']; ?></option>
-								<?php } ?>
-								</select>
+                <?php 
+                    $author = displayErrors($errors, 'author');
+                    echo $author;
+                ?>
+				<label>Author:</label>	
+				<input type="text" name="author" placeholder="author">
+			</div>
 
-            </div>
-            <input type="submit" name="add_product" value="Add"/>
-        </form>
+			<div>
+                <?php  
+                    $price= displayErrors($errors, 'price');
+                    echo $price;
+                ?>
+				<label>Price:</label>
+				<input type="text" name="price" placeholder="price">
+			</div>
+			<div>
+                <?php  
+                    $year = displayErrors($errors, 'year');
+                    echo $year;
+                ?>
+				<label>Category:</label>
+				<input type="text" name="year" placeholder="publication date">
+			</div>
+ 
+			<div>
+                <?php  
+					$err = displayErrors($errors, 'cat');
+					echo $err;
+                ?>
+				<label>:</label>	
+				<select name= "cat">
+					<?php
+
+					?>
+				</select>
+			</div>
+
+			<div>
+                <?php  
+					$err = displayErrors($errors, 'flag');
+					echo $err;
+                ?>
+				<label>Flag:</label>	
+				<select name= "flag">
+					<option name="">Select Flag</option>
+					<?php foreach($flag as $fl) { ?>
+						<option value="<?php echo $fl; ?>"><?php echo $fl; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+
+			<div>
+                <?php  
+					$err = displayErrors($errors, 'image');
+					echo $err;
+                ?>
+				<label>Book Image:</label>
+				<p>Please upload a book image</p>	
+				<input type ="file" name ="image"/>
+			</div>
+
+			<input type="submit" name="register" value="register">
+		</form>
+
+		<h4 class="jumpto">Have an account? <a href="login.php">login</a></h4>
     </div>
-</div>
-
-<?php
-
-    include("includes/footer.php");
-
-?>
