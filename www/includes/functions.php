@@ -80,28 +80,8 @@
             }
             return $result;
 
-            
-            /* $hash = $result['hash'];
-            
-            $stmt2 = $dbconn->prepare("SELECT * FROM admin WHERE :p=$hash");
-            $hashed = password_verify($password, $hash);
-            $stmt2->bindParam(":p", $hashed);
-            $stmt2->execute();
- */
         }
 
-        //$stmt2 = $stmt->fetchAll();
-        //print_r($stmt2['firstName']);
-
-        /* $count = $stmt->rowCount();
-
-        if($count == 1) {
-
-            $result = true;
-        } else{
-            $result = false;
-        }
-        return $result;*/
     }
 
     function adminLogin($dbconn, $input) {
