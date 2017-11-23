@@ -1,12 +1,14 @@
 <?php
 
+	session_start();
+
 	$page_title = "Admin Dashboard";
 
 	include("includes/db.php");
     include("includes/functions.php");
     include("includes/dashboard_header.php");
     
-    //checkLogin();
+    checkLogin();
     
     if($_GET['book_id']) {
         $book_id = $_GET['book_id']; 
@@ -116,7 +118,7 @@
 			<input type="submit" name="edit" value="Edit Products">
 
 		</form>
-        <h4 class="jumpto">To edit product image, <a href="edit_image.php">click here</a></h4>
+        <h4 class="jumpto">To edit product image, <a href="edit_image.php?img=<?php echo $book_id; ?>">click here</a></h4>
 
     </div>
 

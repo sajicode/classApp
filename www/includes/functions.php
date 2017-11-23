@@ -344,6 +344,18 @@
 
         $stmt->execute($data);
     }
+
+    function updateImage($dbconn, $id, $location) {
+
+        $stmt = $dbconn->prepare("UPDATE books SET img_path = :img WHERE book_id=:bid");
+
+        $data = [
+            ":img"=>$location,
+            ":bid"=>$id
+        ];
+
+        $stmt->execute($data);
+    }
  
 
 ?>
