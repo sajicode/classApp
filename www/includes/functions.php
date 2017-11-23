@@ -223,6 +223,12 @@
 
         while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
 
+            if($val == $row[1]) {
+
+                conitnue;
+                
+            }
+
             $result .= '<option value ="'.$row[0].'">'.$row[1].'</option>';
 
         }
@@ -270,7 +276,7 @@
         return $result;
     }
 
-    function getBookById($dbconn, $id) {
+    /* function getBookById($dbconn, $id) {
 
         $stmt = $dbconn->prepare("SELECT * FROM books WHERE book_id=:bookId");
 
@@ -282,7 +288,7 @@
 
         return $row;
     }
-
+ */
     function updateProduct($dbconn, $input) {
 
         $stmt = $dbconn->prepare("UPDATE books SET title=:t, author=:a, price=:p, publication_date=:pub, flag=:fl WHERE book_id=:bookId");
@@ -306,6 +312,19 @@
         $stmt->bindParam(":bookId", $id);
 
         $stmt->execute();
+    }
+
+    function getProductById($dbconn, $id) {
+
+        $result = "";
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE book_id = :bid");
+
+        $stmt->bindParam(":bid", $id);
+
+        $result = $stmt->fetch(PDO::FETCH_BOTH);
+
+        return $result;
     }
 
 
