@@ -14,7 +14,7 @@
 
     $item = getProductbyId($conn, $book_id);
 
-    $category = getCategoryById($conn, $book_id);
+    $category = getCategoryById($conn, $item[5]);
 
     //print_r($item); exit();
 
@@ -48,7 +48,9 @@
 
 		if(empty($errors)) {
 
-			
+			$clean = array_map('trim', $_POST);
+			$clean['id'] = $book_id;
+						
 		}
 	}
 
@@ -98,10 +100,10 @@
                 ?>
 				<label>Category:</label>	
 				<select name= "cat">
-					<option value ="">Select Category</option>
-                    <option value=""><?php echo $category[1]; ?></option>
+					<!--<option value ="">Select Category</option>-->
+                    <option><?php echo $category[1]; ?></option>
 					<?php
-						$data = fetchCategory($conn);
+						$data = fetchCategory($conn, $category[1]);
 						echo $data;
 					?>
 				</select>
@@ -110,7 +112,7 @@
 			<input type="submit" name="edit" value="Edit Products">
 
 		</form>
-        <h4 class="jumpto">Don't have an account? <a href="edit_products.php">register</a></h4>
+        <h4 class="jumpto">To edit product image, <a href="edit_image.php">click here</a></h4>
 
     </div>
 

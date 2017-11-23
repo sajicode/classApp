@@ -225,8 +225,8 @@
 
             if($val == $row[1]) {
 
-                conitnue;
-                
+                continue;
+
             }
 
             $result .= '<option value ="'.$row[0].'">'.$row[1].'</option>';
@@ -289,7 +289,7 @@
         return $row;
     }
  */
-    function updateProduct($dbconn, $input) {
+    /* function updateProduct($dbconn, $input) {
 
         $stmt = $dbconn->prepare("UPDATE books SET title=:t, author=:a, price=:p, publication_date=:pub, flag=:fl WHERE book_id=:bookId");
 
@@ -303,7 +303,7 @@
         ];
 
         $stmt->execute($data);
-    }
+    } */
 
     function deleteProduct($dbconn, $id) {
 
@@ -322,12 +322,28 @@
 
         $stmt->bindParam(":bid", $id);
 
+        $stmt->execute();
+
         $result = $stmt->fetch(PDO::FETCH_BOTH);
 
         return $result;
     }
 
+    function editProduct($dbconn, $input) {
 
+        $stmt = $dbconn->prepare("UPDATE books SET title=:t, author=:a, price=:p, publication_date=:pub, category_id=:catId WHERE book_id=:bookId");
+
+        $data = [
+            ":t"=>$input['title'],
+            ":a"=>$input['author'],
+            ":p"=>$input['price'],
+            ":pub"=>$input['year'],
+            ":catId"=>$input['cat'],
+            ":bookId"=>$input['id']
+        ];
+
+        $stmt->execute($data);
+    }
  
 
 ?>
