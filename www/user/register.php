@@ -12,6 +12,42 @@
 
     $errors = [];
 
+    if(array_key_exists('register', $_POST)) {
+
+        if(empty($_POST['fname'])) {
+            $errors['fname'] = "Please enter your firstname";
+        }
+
+        if(empty($_POST['lname'])) {
+            $errors['lname'] = "Please enter your lastname";
+        }
+
+        if(empty($_POST['email'])) {
+            $errors['email'] = "Please enter your email";
+        }
+
+        if(empty($_POST['uname'])) {
+            $errors['uname'] = "Please enter a username";
+        }
+
+        if(empty($_POST['password'])) {
+            $errors['password'] = "Please enter a password";
+        }
+
+        if(empty($_POST['pword'])) {
+            $errors['pword'] = "Please re-enter your password";
+        }
+
+        if($_POST['password'] != $_POST['pword']) {
+            $errors['pword'] = "Please re-enter the correct password";
+        }
+
+        if(empty($errors)) {
+
+            
+        }
+    }
+
 ?>
 
 <div class="main">
