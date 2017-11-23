@@ -288,8 +288,8 @@
 
         return $row;
     }
- */
-    /* function updateProduct($dbconn, $input) {
+ 
+     function updateProduct($dbconn, $input) {
 
         $stmt = $dbconn->prepare("UPDATE books SET title=:t, author=:a, price=:p, publication_date=:pub, flag=:fl WHERE book_id=:bookId");
 
