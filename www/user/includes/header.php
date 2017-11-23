@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="style/styles.css">
-    <title>Home</title>
+    <title><?php echo $pagetitle; ?></title>
 </head>
-<body id="home">
+<body id="<?php echo $id; ?>">
   <!-- DO NOT TAMPER WITH CLASS NAMES! -->
 
   <!-- top bar starts here -->
