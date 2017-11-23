@@ -50,7 +50,11 @@
 
 			$clean = array_map('trim', $_POST);
 			$clean['id'] = $book_id;
-						
+
+			editProduct($conn, $clean);
+
+			redirect("view_products.php");
+
 		}
 	}
 
@@ -101,7 +105,7 @@
 				<label>Category:</label>	
 				<select name= "cat">
 					<!--<option value ="">Select Category</option>-->
-                    <option><?php echo $category[1]; ?></option>
+                    <option value="<?php echo $category[0]; ?>"><?php echo $category[1]; ?></option>
 					<?php
 						$data = fetchCategory($conn, $category[1]);
 						echo $data;
