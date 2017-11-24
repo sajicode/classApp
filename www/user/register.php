@@ -10,7 +10,7 @@
 
     include("includes/header.php");
 
-    $errors = [];
+    $errors = array();
 
     if(array_key_exists('register', $_POST)) {
 
@@ -24,6 +24,10 @@
 
         if(empty($_POST['email'])) {
             $errors['email'] = "Please enter your email";
+        }
+
+        if(doesEmailExist($db, $_POST['email'])) {
+            $errors['email'] = "Email already in use";
         }
 
         if(empty($_POST['uname'])) {
@@ -44,7 +48,11 @@
 
         if(empty($errors)) {
 
-            
+            $clean = array_map('trim', $_POST);
+
+            userRegister($db, $clean);
+
+            redirect("register.php");
         }
     }
 
@@ -58,43 +66,43 @@
         
         <div>
             <?php
-                $info = displayErrors($errors, 'fname');
-                echo $info;
+                $fname = displayErrors($errors, 'fname');
+                echo $fname;
             ?>
             <input type="text" name="fname" class="text-field first-name" placeholder="Firstname">
         </div>
         <div>
             <?php
-                $info = displayErrors($errors, 'lname');
-                echo $info;
+                $lname = displayErrors($errors, 'lname');
+                echo $lname;
             ?>
             <input type="text" name="lname" class="text-field last-name" placeholder="Lastname">
         </div>
         <div>
             <?php
-                $info = displayErrors($errors, 'email');
-                echo $info;
+                $mail = displayErrors($errors, 'email');
+                echo $mail;
             ?>
             <input type="email" name="email" class="text-field email" placeholder="Email">
         </div>
         <div>
             <?php
-                $info = displayErrors($errors, 'uname');
-                echo $info;
+                $uname = displayErrors($errors, 'uname');
+                echo $uname;
             ?>
             <input type="text" name="uname" class="text-field username" placeholder="Username">
         </div>
         <div>
             <?php
-                $info = displayErrors($errors, 'password');
-                echo $info;
+                $password = displayErrors($errors, 'password');
+                echo $password;
             ?>
             <input type="password" name="password" class="text-field password" placeholder="Password">
         </div>
         <div>
             <?php
-                $info = displayErrors($errors, 'pword');
-                echo $info;
+                $pword = displayErrors($errors, 'pword');
+                echo $pword;
             ?>
             <input type="password" name="pword" class="text-field confirm-password" placeholder="Confirm Password">
         </div>

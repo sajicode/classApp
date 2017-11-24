@@ -28,4 +28,25 @@
         return $result;
     }
 
+    function userRegister($dbconn, $input) {
+
+        $hash = password_hash($input['password'], PASSWORD_BCRYPT);
+
+        $stmt = $dbconn->prepare("INSERT INTO customers(firstName, lastName, email, username, hash) VALUES(:f, :l, :e, :u, :h)");
+
+        $data = [
+            ":f" => $input['fname'],
+            ":l" => $input['lname'],
+            ":e" => $input['email'],
+            ":u"=>$input['uname'],
+            ":h" => $hash
+        ];
+
+        $stmt->execute($data);
+    }
+
+    function redirect($location, $msg) {
+        header("location: ".$location.$msg);
+    }
+
 ?>
