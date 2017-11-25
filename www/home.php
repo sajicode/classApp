@@ -23,7 +23,7 @@
             $topImage = $item['img_path'];
 
         ?>
-      <div class="display-book" style="background: url('<?php echo ".../".$topImage; ?>'); background-size: cover; 
+      <div class="display-book" style="background: url('<?php echo $topImage; ?>'); background-size: cover; 
       background-position: center; background-repeat: no-repeat;"></div>
       <div class="info">
         <h2 class="book-title"><?php echo $item['title']; ?></h2>

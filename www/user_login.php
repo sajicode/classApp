@@ -40,7 +40,7 @@
 			$_SESSION['aid'] = $details['customer_id'];
 			$_SESSION['name'] = $details['firstName'].' '. $details['lastName'];
 
-			redirect("index.php", "?Login Successful");
+			redirect("home.php", "?Login Successful");
 
 			} else {
 
