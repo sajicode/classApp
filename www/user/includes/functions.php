@@ -122,24 +122,23 @@
 
     }
 
-    function bookInfo($dbconn, $topSeller) {
+    function bookInfo($dbconn, $top) {
 
         $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
 
-        $topSeller = 'Top-Selling';
-
-        $stmt->bindParam(":f", $topSeller);
+        $stmt->bindParam(":f", $top);
 
         $stmt->execute();
 
-       /*  $row = $stmt->fetch(PDO::FETCH_BOTH);
+        $count = $stmt->rowCount();
 
-        if($row['flag'] == 'Top-Selling') {
+        if($count == 1) {
 
-            $row['flag'] = $topSeller;
+            $row = $stmt->fetch(PDO::FETCH_BOTH);
 
         }
-        return $topSeller; */
+        return $row;
+
     }
 
     

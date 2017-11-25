@@ -16,16 +16,19 @@
     <div class="book-display">
         <?php
 
-            bookInfo($conn);
+            $topSeller = 'Top-Selling';
 
-            $row = $stmt->fetch(PDO::FETCH_BOTH);
+            $item = bookInfo($conn, $topSeller);
+
+            $topImage = $item['img_path'];
 
         ?>
-      <div class="display-book"></div>
+      <div class="display-book" style="background: url('<?php echo $topImage; ?>'); background-size: cover; 
+      background-position: center; background-repeat: no-repeat;"></div>
       <div class="info">
-        <h2 class="book-title"><?php echo $row['title']; ?></h2>
-        <h3 class="book-author">by Marijn Haverbeke</h3>
-        <h3 class="book-price">$200</h3>
+        <h2 class="book-title"><?php echo $item['title']; ?></h2>
+        <h3 class="book-author"><?php echo $item['author']; ?></h3>
+        <h3 class="book-price"><?php echo "$".$item['price']; ?></h3>
 
         <form>
           <label for="book-amout">Amount</label>
