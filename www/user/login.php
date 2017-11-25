@@ -1,6 +1,9 @@
 <?php
 
 	session_start();
+
+	$id = "login";
+
 	$page_title = "Login";
 
 	include 'includes/db.php';
@@ -8,8 +11,6 @@
 	include 'includes/functions.php';
 
 	include 'includes/header.php';
-
-	include 'includes/footer.php';
 
 	$errors = array();
 
@@ -39,11 +40,11 @@
 			$_SESSION['aid'] = $details['customer_id'];
 			$_SESSION['name'] = $details['firstName'].' '. $details['lastName'];
 
-			header("location:index.php");
+			redirect("index.php", "?Login Successful");
 
 			} else {
 
-			echo "Invalid Email/Password";
+				redirect("login.php", "Invalid Email and/or Password");
 
 			}
 
@@ -76,5 +77,9 @@
 	</div>
 
 </div>
+
+<?php include 'includes/footer.php'; ?>
+
+
 
 	

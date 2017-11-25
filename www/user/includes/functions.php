@@ -81,11 +81,11 @@
         $count = $stmt->rowCount();
 
         $row = $stmt->fetch(PDO::FETCH_BOTH);
-        echo $row['hash'];
 
-        if(!password_verify($input['password'], $row['hash'])) {
+        if($count != 1 || !password_verify($input['password'], $row['hash'])) {
 
             $result[]= false;
+
         } else {
 
             $result[] = true;
@@ -114,6 +114,32 @@
 
         return $row;
 
+    }
+
+    function redirect($location, $msg) {
+
+        header("location: ".$location.$msg);
+
+    }
+
+    function bookInfo($dbconn, $topSeller) {
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
+
+        $topSeller = 'Top-Selling';
+
+        $stmt->bindParam(":f", $topSeller);
+
+        $stmt->execute();
+
+       /*  $row = $stmt->fetch(PDO::FETCH_BOTH);
+
+        if($row['flag'] == 'Top-Selling') {
+
+            $row['flag'] = $topSeller;
+
+        }
+        return $topSeller; */
     }
 
     
