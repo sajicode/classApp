@@ -8,9 +8,9 @@
 
 	include 'includes/db.php';
 
-	include 'includes/functions.php';
+	include 'includes/user_functions.php';
 
-	include 'includes/header.php';
+	include 'includes/user_header.php';
 
 	$errors = array();
 
@@ -78,7 +78,7 @@
 
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include 'includes/user_footer.php'; ?>
 
 
 
