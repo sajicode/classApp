@@ -37,6 +37,25 @@
         return $result;
     }
 
+    function doesUnameExist($dbconn, $uname) {
+
+        $result = false;
+
+        $stmt = $dbconn->prepare("SELECT username FROM customers WHERE :u=username");
+
+        $stmt->bindParam(":u", $uname);
+
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+
+        if($count > 0) {
+
+            $result = true;
+        }
+        return $result;
+    }
+
     function displayErrors($err, $name) {
 
         $result = "";

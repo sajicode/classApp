@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style/styles.css">
     <title><?php echo $page_title ?></title>
 </head>
-<body id="registration">
+<body id="<?php echo $id; ?>">
   <!-- DO NOT TAMPER WITH CLASS NAMES! -->
 
   <!-- top bar starts here -->
