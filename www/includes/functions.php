@@ -266,7 +266,7 @@
 
             $result .= '<tr><td>'.$row[1].'</td>';
             $result .= '<td>'.$row[2].'</td>';
-            $result .= '<td>'.$row[3].'</td>';
+            $result .= '<td>$'.$row[3].'</td>';
             $result .= '<td>'.$row[5].'</td>';
             $result .= '<td><img src="'.$row[7].'"height="50" width="50"></td>';
             $result .= '<td><a href="edit_products.php?book_id='.$row[0].'">edit</a></td>';
