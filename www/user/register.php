@@ -26,7 +26,7 @@
             $errors['email'] = "Please enter your email";
         }
 
-        if(doesEmailExist($db, $_POST['email'])) {
+        if(doesEmailExist($conn, $_POST['email'])) {
             $errors['email'] = "Email already in use";
         }
 
@@ -50,9 +50,15 @@
 
             $clean = array_map('trim', $_POST);
 
-            userRegister($db, $clean);
+            print_r($clean);
 
-            redirect("register.php");
+            exit();
+
+            //userRegister($conn, $clean);
+
+            echo "Registration successful";
+
+            //redirect("register.php");
         }
     }
 
@@ -60,7 +66,7 @@
 
 <div class="main">
     <div class="registration-form">
-      <form class="def-modal-form">
+      <form action="" method="POST" class="def-modal-form">
         <div class="cancel-icon close-form"></div>
         <label for="registration-from" class="header"><h3>User Registration</h3></label>
         
