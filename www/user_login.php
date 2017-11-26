@@ -37,8 +37,9 @@
 
 			$details = $data[1];
 
-			$_SESSION['aid'] = $details['customer_id'];
-			$_SESSION['name'] = $details['firstName'].' '. $details['lastName'];
+			$_SESSION['userid'] = $details['customer_id'];
+			$_SESSION['fname'] = $details['firstName'];
+			$_SESSION['lname'] = $details['lastName'];
 
 			redirect("home.php", "?Login Successful");
 

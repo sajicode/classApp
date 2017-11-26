@@ -101,7 +101,7 @@
             header("location:login.php");
         }
     }
-
+/* 
     function fetchBookByFlag ($dbconn, $dbflag) {
 
         $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
@@ -114,7 +114,7 @@
 
         return $row;
 
-    }
+    } */
 
     function redirect($location, $msg) {
 
@@ -175,6 +175,51 @@
         }
 
         return $price;
+    }
+
+    function displayIdByCat($dbconn, $input) {
+
+        $id = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
+
+        $stmt->bindParam(":f", $input);
+
+        $stmt->execute();
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $id[] = $select[0];
+        }
+
+        return $id;
+    }
+
+    function fetchBookById($dbconn, $id) {
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE book_id=:bid");
+
+        $stmt->bindParam(":bid", $id);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_BOTH);
+
+        return $row;
+    }
+
+    function insertIntoReview($dbconn, $input) {
+
+    $stmt = $dbconn->prepare("INSERT INTO reviews(book_id, customer_id, review)VALUES(:bid, :cid, :r)");
+
+    $data =[
+        ":bid"=>$input['bookId'],
+        ":cid"=>$input['userId'],
+        ":r"=> $input['review'],
+    ];
+
+    $stmt->execute($data);
+
     }
     
 

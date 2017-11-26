@@ -1,18 +1,27 @@
 <?php
 
-  $page_title = "Home";
+	session_start();
 
-  $id = "home";
+	$page_title = "Home";
 
-  include 'includes/db.php';
+	$id = "home";
 
-  include 'includes/user_functions.php';
+	include 'includes/db.php';
 
-  include 'includes/user_header.php';
+	include 'includes/user_functions.php';
+
+	include 'includes/user_header.php';
+
+	$user_id = $_SESSION['userid'];
+	$fname = $_SESSION['fname'];
+	$lname = $_SESSION['lname'];
+
 
 ?>
 
 <div class="main">
+	<?php echo "Welcome ".$fname.' '.$lname; ?>
+
     <div class="book-display">
         <?php
 
@@ -20,7 +29,8 @@
 
             $item = bookInfo($conn, $topSeller);
 
-            $topImage = $item['img_path'];
+			$topImage = $item['img_path'];
+			
 
         ?>
       <div class="display-book" style="background: url('<?php echo $topImage; ?>'); background-size: cover; 
@@ -55,27 +65,34 @@
 		$price3 = $trendPrice[14];
 		$price4 = $trendPrice[19];
 
+		$productId = displayIdByCat($conn, $trending);
+
+		$trendId1 = $productId[0];
+		$trendId2 = $productId[10];
+		$trendId3 = $productId[14];
+		$trendId4 = $productId[19];
+
     ?>
     <div class="trending-books horizontal-book-list">
       <h3 class="header">Trending</h3>
       <ul class="book-list">
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend1; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $trendId1; ?>"><div class="book-cover" style="background: url('<?php echo $trend1; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$price1; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend2; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $trendId2; ?>"><div class="book-cover" style="background: url('<?php echo $trend2; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$price2; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend3; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $trendId3; ?>"><div class="book-cover" style="background: url('<?php echo $trend3; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$price3; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend4; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $trendId4; ?>"><div class="book-cover" style="background: url('<?php echo $trend4; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$price4; ?></p></div>
         </li>
@@ -99,6 +116,13 @@
 		$recPrice3 = $recentPrice[10];
 		$recPrice4 = $recentPrice[14];
 
+		$bookId = displayIdByCat($conn, $recentViewed);
+
+		$recId1 = $bookId[2];
+		$recId2 = $bookId[6];
+		$recId3 = $bookId[10];
+		$recId4 = $bookId[14];
+
     ?>
     <div class="recently-viewed-books horizontal-book-list">
       <h3 class="header">Recently Viewed</h3>
@@ -106,22 +130,22 @@
         <div class="scroll-back"></div>
         <div class="scroll-front"></div>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent1; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $recId1; ?>"><div class="book-cover" style="background: url('<?php echo $recent1; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$recPrice1; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent2; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $recId2; ?>"><div class="book-cover" style="background: url('<?php echo $recent2; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$recPrice2; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent3; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $recId3; ?>"><div class="book-cover" style="background: url('<?php echo $recent3; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$recPrice3; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent4; ?>'); background-size: cover; 
+          <a href="bookpreview.php?book_id=<?php echo $recId4; ?>"><div class="book-cover" style="background: url('<?php echo $recent4; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div></a>
           <div class="book-price"><p><?php echo "$".$recPrice4; ?></p></div>
         </li>
