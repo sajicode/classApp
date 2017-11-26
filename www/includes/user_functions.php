@@ -338,6 +338,21 @@
         }
         return $cat;
     }
+
+    function insertIntoCart($dbconn, $input) {
+
+        $stmt = $dbconn->prepare("INSERT INTO cart(item, price, quantity, total, item_id)VALUES(:i, :p, :q, :t, :iId)");
+
+        $data = [
+            ":i"=>$input['image'],
+            ":p"=>$input['prices'],
+            ":q"=>$input['qty'],
+            ":t"=>$input['total'],
+            ":iId"=>$input['item_id']
+        ];
+
+        $stmt->execute($data);
+    }
     
 
 
