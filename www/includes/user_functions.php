@@ -141,6 +141,41 @@
 
     }
 
+    function displayImageByCat($dbconn, $input) {
+
+        $cover = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
+
+        $stmt->bindParam(":f", $input);
+
+        $stmt->execute();
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cover[] = $select[7];
+        }
+
+        return $cover;
+    }
+
+    function displayPriceByCat($dbconn, $input) {
+
+        $price = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
+
+        $stmt->bindParam(":f", $input);
+
+        $stmt->execute();
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $price[] = $select[3];
+        }
+
+        return $price;
+    }
     
 
 

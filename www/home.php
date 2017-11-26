@@ -37,47 +37,93 @@
         </form>
       </div>
     </div>
+    <?php
+
+		$trending = 'Trending';
+
+		$trend = displayImageByCat($conn, $trending);
+		
+		$trend1 = $trend[0];
+		$trend2 = $trend[10];
+		$trend3 = $trend[14];
+		$trend4 = $trend[19];
+
+		$trendPrice = displayPriceByCat($conn, $trending);
+
+		$price1 = $trendPrice[0];
+		$price2 = $trendPrice[10];
+		$price3 = $trendPrice[14];
+		$price4 = $trendPrice[19];
+
+    ?>
     <div class="trending-books horizontal-book-list">
       <h3 class="header">Trending</h3>
       <ul class="book-list">
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$125</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend1; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$price1; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$90</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend2; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$price2; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$250</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend3; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$price3; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$50</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $trend4; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$price4; ?></p></div>
         </li>
       </ul>
     </div>
+	<?php
+
+		$recentViewed = 'Recently-Viewed';
+
+		$recentImg = displayImageByCat($conn, $recentViewed);
+		
+		$recent1 = $recentImg[2];
+		$recent2 = $recentImg[6];
+		$recent3 = $recentImg[10];
+		$recent4 = $recentImg[14];
+
+		$recentPrice = displayPriceByCat($conn, $recentViewed);
+
+		$recPrice1 = $recentPrice[2];
+		$recPrice2 = $recentPrice[6];
+		$recPrice3 = $recentPrice[10];
+		$recPrice4 = $recentPrice[14];
+
+    ?>
     <div class="recently-viewed-books horizontal-book-list">
       <h3 class="header">Recently Viewed</h3>
       <ul class="book-list">
         <div class="scroll-back"></div>
         <div class="scroll-front"></div>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$250</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent1; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$recPrice1; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$50</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent2; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$recPrice2; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$125</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent3; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$recPrice3; ?></p></div>
         </li>
         <li class="book">
-          <a href="#"><div class="book-cover"></div></a>
-          <div class="book-price"><p>$90</p></div>
+          <a href="#"><div class="book-cover" style="background: url('<?php echo $recent4; ?>'); background-size: cover; 
+      		background-position: center; background-repeat: no-repeat;"></div></a>
+          <div class="book-price"><p><?php echo "$".$recPrice4; ?></p></div>
         </li>
       </ul>
     </div>
