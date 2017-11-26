@@ -32,21 +32,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><div class="book-cover b1"></div></td>
-          <td><p class="book-price">$200</p></td>
-          <td><p class="quantity">3</p></td>
-          <td><p class="total">$600</p></td>
-          <td>
-            <form class="update">
-              <input type="number" class="text-field qty">
-              <input type="submit" class="def-button change-qty" value="Change Qty">
-            </form>
-          </td>
-          <td>
-            <a href class="def-button remove-item">Remove Item</a>
-          </td>
-        </tr>
+        <?php 
+         
+            $data = viewCart($conn);
+
+            echo $data;
+
+        ?>
+
         <tr>
           <td><div class="book-cover b2"></div></td>
           <td><p class="book-price">$150</p></td>

@@ -16,27 +16,21 @@
 	$fname = $_SESSION['fname'];
 	$lname = $_SESSION['lname'];
 
+	if($_GET['cat_id']) {
+		$cat_id = $_GET['cat_id'];
+	}
+
 
 ?>
 
 <div class="side-bar">
     <div class="categories">
-      <h3 class="header">Categories</h3>
-      <ul class="category-list">
-        <a href="#"><li class="category">Javascript</li></a>
-        <a href="#"><li class="category">HTML</li></a>
-        <a href="#"><li class="category">History</li></a>
-        <a href="#"><li class="category">Literature</li></a>
-        <a href="#"><li class="category">Mathematics</li></a>
-        <a href="#"><li class="category">Engineering</li></a>
-        <a href="#"><li class="category">Politics</li></a>
-        <a href="#"><li class="category">Music</li></a>
-        <a href="#"><li class="category">Literature</li></a>
-        <a href="#"><li class="category">Mathematics</li></a>
-        <a href="#"><li class="category">Engineering</li></a>
-        <a href="#"><li class="category">Politics</li></a>
-        <a href="#"><li class="category">Music</li></a>
-      </ul>
+      	<h3 class="header">Categories</h3>
+      	<ul class="category-list">
+
+			<?php $data = displaySidebar($conn); echo $data; ?>
+    
+      	</ul>
     </div>
 </div>
 
@@ -46,7 +40,7 @@
 
         $clean = array_map('trim', $_POST);
 
-        $clean['cat_id'] = 2;
+        $clean['cat_id'] = $cat_id;
 
         $price = selectPriceByCat($conn, $clean['cat_id']);
 
@@ -138,7 +132,7 @@
             //$clean = array_map('trim', $_POST);
 
             $clean['flg'] = "Recently-Viewed";
-            $clean['catId'] = 2;
+            $clean['catId'] = $cat_id;
 
             $recentjs = selectImageByFlagAndCat($conn, $clean);
 

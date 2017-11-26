@@ -45,7 +45,30 @@
 
             redirect("home.php");
         }
-    }
+	}
+	
+	$errors = [];
+
+	if(array_key_exists('buy', $_POST)) {
+
+		if(empty($_POST['qty'])) {
+
+			$errors['qty'] = "Please select the quantity of books you wish to buy";
+
+		}
+
+		if(empty($errors)) {
+
+			$clean = array_map('trim', $_POST);
+			$clean['image'] = $item['img_path'];
+			$clean['prices'] = $item['price'];
+			$clean['total'] = ($_POST['qty'] * $clean['prices']);
+			$clean['item_id'] = $item['book_id'];
+
+			insertIntoCart($conn, $clean);
+			redirect("catalogue.php","?Added to cart");
+		}
+	}
 
 ?>
 
@@ -58,10 +81,10 @@
         <h2 class="book-title"><?php echo $item[1]; ?></h2>
         <h3 class="book-author"><?php echo "by ".$item[2]; ?></h3>
         <h3 class="book-price"><?php echo "$".$item[3]; ?></h3>
-        <form>
+        <form action="" method="POST">
           <label for="book-amout">Amount</label>
-          <input type="number" class="book-amount text-field">
-          <input class="def-button add-to-cart" type="submit" name="" value="Add to cart">
+          <input type="number" class="book-amount text-field" name="qty">
+          <input class="def-button add-to-cart" type="submit" name="buy" value="Add to cart">
         </form>
       </div>
     </div>

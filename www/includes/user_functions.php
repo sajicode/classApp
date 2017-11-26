@@ -353,6 +353,67 @@
 
         $stmt->execute($data);
     }
+
+    function viewCart($dbconn) {
+
+        $result = "";
+
+        $stmt = $dbconn->prepare("SELECT * FROM cart");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $result .= '<tr><td><div class="book-cover b1" style="background: url('.$row[1].'); background-size: cover; 
+                      background-position: center; background-repeat: no-repeat;"</td>';
+
+            $result .= '<td><p class="book-price">'.$row[2].'</p></td>';
+
+            $result .= '<td><p class="quantity">'.$row[3].'</p></td>';
+
+            $result .= '<td><p class="total">'.$row[4].'</p></td>';
+
+            $result .= '<td>
+                            <form class="update" name="quant">
+                                <input type="number" class="text-field qty">
+                                <input type="submit" class="def-button change-qty" value="Change Qty" name="update">
+                            </form>
+                        </td>';
+
+            $result .= '<td><a href class="def-button remove-item">Remove Item</a></td></tr>';
+        }
+        return $result;
+    }
+
+    function displaySidebar($dbconn) {
+
+        $result = "";
+
+        $stmt = $dbconn->prepare("SELECT * FROM category");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $result .= '<a href="catalogue.php?cat_id='.$row[0].'"><li class="category">'.$row[1].'</li></a>';
+
+        }
+        return $result;
+    }
+
+    function fetchCategory($dbconn) {
+
+        $stmt=$dbconn->prepare("SELECT * FROM category");
+
+        $stmt->execute();
+
+        while($row=$stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat = $row[0];
+
+        }
+        return $cat;
+    }
     
 
 
