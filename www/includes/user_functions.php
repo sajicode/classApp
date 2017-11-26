@@ -221,8 +221,124 @@
     $stmt->execute($data);
 
     }
-    
 
+    function selectPriceByCat($dbconn, $input) {
+
+        $cat = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE category_id = :cid");
+
+        $stmt->bindParam(":cid", $input);
+
+        $stmt->execute();
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat[] = $select[3];
+
+        }
+        return $cat;
+    }
+
+    function selectImageByCat($dbconn, $input) {
+
+        $cat = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE category_id = :cid");
+
+        $stmt->bindParam(":cid", $input);
+
+        $stmt->execute();
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat[] = $select[7];
+
+        }
+        return $cat;
+    }
+    
+    function selectIdByCat($dbconn, $input) {
+
+        $cat = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE category_id = :cid");
+
+        $stmt->bindParam(":cid", $input);
+
+        $stmt->execute();
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat[] = $select[0];
+
+        }
+        return $cat;
+    }
+
+    function selectImageByFlagAndCat($dbconn, $input) {
+
+        $cat = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE category_id = :cid AND flag=:f");
+
+        $data = [
+            ":cid"=>$input['catId'],
+            ":f" =>$input['flg']
+        ];
+
+        $stmt->execute($data);
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat[] = $select[7];
+
+        }
+        return $cat;
+    }
+
+    function selectPriceByFlagAndCat($dbconn, $input) {
+
+        $cat = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE category_id = :cid AND flag=:f");
+
+        $data = [
+            ":cid"=>$input['catId'],
+            ":f" =>$input['flg']
+        ];
+
+        $stmt->execute($data);
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat[] = $select[3];
+
+        }
+        return $cat;
+    }
+
+    function selectIdByFlagAndCat($dbconn, $input) {
+
+        $cat = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM books WHERE category_id = :cid AND flag=:f");
+
+        $data = [
+            ":cid"=>$input['catId'],
+            ":f" =>$input['flg']
+        ];
+
+        $stmt->execute($data);
+
+        while($select = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $cat[] = $select[0];
+
+        }
+        return $cat;
+    }
+    
 
 
 ?>

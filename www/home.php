@@ -30,7 +30,6 @@
             $item = bookInfo($conn, $topSeller);
 
 			$topImage = $item['img_path'];
-			
 
         ?>
       <div class="display-book" style="background: url('<?php echo $topImage; ?>'); background-size: cover; 
