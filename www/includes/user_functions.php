@@ -415,6 +415,24 @@
         return $cat;
     }
     
+    function fetchBook($dbconn) {
+
+        $stmt = $dbconn->prepare("SELECT * FROM books");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)); {
+
+            $bookId = $row[0];
+
+        }
+        return $bookId;
+    }
+
+    function updateQty($dbconn, $input) {
+
+        $stmt = $dbconn("UPDATE ")
+    }
 
 
 ?>
