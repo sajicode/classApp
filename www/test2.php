@@ -1,5 +1,6 @@
 <?php
 
+    include("downloadable.php");
     include("product.php");
     include("dvd.php");
     include("book.php");
@@ -46,4 +47,6 @@
     echo "<hr>";
 
     //$dvd->getDescription();
+
+    $book->prepareDownloadLink();
 ?>

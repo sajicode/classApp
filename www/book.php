@@ -1,6 +1,6 @@
 <?php   #Book Class
 
-    class Book extends Product
+    class Book extends Product implements iDownloadable
     {
         private $_author;
 
@@ -28,6 +28,10 @@
             echo '<li> author: '.$this->getAuthor().'</li>';
 
             echo '</ul>';
+        }
+
+        public function prepareDownloadLink() {
+            echo "Go Go Go";
         }
     }
 

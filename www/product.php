@@ -6,12 +6,12 @@
         protected $_price;
         protected $_type;
 
-        /*public function __construct(*//*$type, *//*$title, $price) {    //constructor, called only once*/
+        //public function __construct(/*$type, */$title, $price) {    //constructor, called only once
 
-            /*$this->_title = $title;
-            $this->_price = $price;
+            //$this->_title = $title;
+            //$this->_price = $price;
             //$this->_type = $type;
-        }*/
+        //}
 
         //an object is an instance of a class
 
