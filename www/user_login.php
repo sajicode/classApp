@@ -45,7 +45,7 @@
 
 			} else {
 
-				redirect("login.php", "Invalid Email and/or Password");
+				redirect("user_login.php", "Invalid Email and/or Password");
 
 			}
 
