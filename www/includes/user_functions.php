@@ -374,13 +374,15 @@
             $result .= '<td><p class="total">'.$row[4].'</p></td>';
 
             $result .= '<td>
-                            <form class="update" name="quant">
-                                <input type="number" class="text-field qty">
+                            <form class="update" action ="" method= "POST" >
+                                <input type="number" class="text-field qty" name="quant">
                                 <input type="submit" class="def-button change-qty" value="Change Qty" name="update">
+                                <input type ="hidden" name="bookId" value="'.$row[5].'">
+                                <input type ="hidden" name="price" value="'.$row[2].'">
                             </form>
                         </td>';
 
-            $result .= '<td><a href class="def-button remove-item">Remove Item</a></td></tr>';
+            $result .= '<td><a href="delete_item.php?bookId='.$row[5].' class="def-button remove-item">Remove Item</a></td></tr>';
         }
         return $result;
     }
@@ -431,7 +433,15 @@
 
     function updateQty($dbconn, $input) {
 
-        $stmt = $dbconn("UPDATE ")
+        $stmt = $dbconn->prepare("UPDATE cart SET quantity = :q, total = :t WHERE item_id=:bid");
+
+        $data = [
+            ":q"=>$input['quant'],
+            ":bid"=>$input['bookId'],
+            ":t" =>$input['total']
+        ];
+
+        $stmt->execute($data);
     }
 
 

@@ -16,6 +16,26 @@
 	$fname = $_SESSION['fname'];
 	$lname = $_SESSION['lname'];
 
+	$errors = [];
+
+	if(array_key_exists('update', $_POST)) {
+
+		if(empty($_POST['quant'])) {
+			$errors['quant'] = "Please select a quantity";
+		}
+
+		if(empty($errors)) {
+			$clean = array_map('trim', $_POST);
+			//$clean['bookId'] = $bookId;
+
+			$clean['total'] = $clean['quant'] * $clean['price'];
+
+			$showData = updateQty($conn, $clean);
+			redirect("cart.php");
+		}
+	}
+
+
 
 ?>
 
@@ -32,8 +52,9 @@
 			</tr>
       	</thead>
       	<tbody>
+		  
 
-        <?php 
+		<?php 
          
             $data = viewCart($conn);
 
