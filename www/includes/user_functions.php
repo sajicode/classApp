@@ -444,5 +444,14 @@
         $stmt->execute($data);
     }
 
+    function deleteBook($dbconn, $input) {
+
+        $stmt = $dbconn->prepare("DELETE FROM cart WHERE item_id=:bid");
+
+        $stmt->bindParam(":bid", $input['book_id']);
+
+        $stmt->execute();
+    }
+
 
 ?>

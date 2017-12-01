@@ -2,9 +2,9 @@
 
 	session_start();
 
-	$page_title = "Catalogue";
+	$page_title = "Cart";
 
-	$id = "catalogue";
+	$id = "cart";
 
 	include 'includes/db.php';
 
@@ -34,8 +34,6 @@
 			redirect("cart.php");
 		}
 	}
-
-
 
 ?>
 
