@@ -94,32 +94,18 @@
         return $result;
     }
 
-    function checkLogin() {
-
-        if(!isset($_SESSION['aid'])) {
-
-            header("location:login.php");
-        }
-    }
-/* 
-    function fetchBookByFlag ($dbconn, $dbflag) {
-
-        $stmt = $dbconn->prepare("SELECT * FROM books WHERE flag=:f");
-
-        $stmt->bindParam(':f', $flag);
-
-        $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_BOTH);
-
-        return $row;
-
-    } */
-
     function redirect($location, $msg) {
 
         header("location: ".$location.$msg);
 
+    }
+
+    function checkLogin() {
+
+        if(!isset($_SESSION['userid'])) {
+
+            header("location:user_login.php");
+        }
     }
 
     function bookInfo($dbconn, $top) {
@@ -451,6 +437,76 @@
         $stmt->bindParam(":bid", $input['book_id']);
 
         $stmt->execute();
+    }
+
+    function getTotal($dbconn) {
+
+        $total = [];
+
+        $stmt = $dbconn->prepare("SELECT * FROM cart");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $total[] = $row[4];
+
+            if(empty($total)) {
+
+                $total_sum = null;
+
+            } else {
+
+            $total_sum = array_sum($total);
+
+            }
+
+        }
+        return $total_sum;
+    }
+
+    function insertIntoSales($dbconn, $input) {
+
+        $stmt = $dbconn->prepare("INSERT INTO sales(phone_no, address, post_code) VALUES(:p, :a, :c)");
+
+        $data = [
+            ":p"=>$input['phone'],
+            ":a"=>$input['addy'],
+            ":c"=>$input['code']
+        ];
+
+        $stmt->execute($data);
+    }
+
+    function deleteCartItems($dbconn) {
+
+        $stmt = $dbconn->prepare("DELETE FROM cart");
+
+        $stmt->execute();
+
+        redirect("home.php","?Shopping Complete");
+    }
+
+    function countCartItems($dbconn) {
+
+        $stmt = $dbconn->prepare("SELECT * FROM cart");
+
+        $stmt->execute();
+
+        while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+
+            $items[] = $row[0];
+
+            $noItem = 0;
+
+            if(count($items) != 0) {
+
+            $numItems = count($items);
+
+            }
+
+        }
+        return $numItems;
     }
 
 

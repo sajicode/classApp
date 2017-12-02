@@ -18,6 +18,8 @@
       
     }
 
+    checkLogin();
+
     $user_id = $_SESSION['userid'];
 	$fname = $_SESSION['fname'];
 	$lname = $_SESSION['lname'];
@@ -73,7 +75,7 @@
 ?>
 
 <div class="main">
-    <p class="global-error">You have not chosen any amount!</p>
+    <p class="global-error"><?php $info = displayErrors($errors, 'qty'); echo $info; ?></p>
     <div class="book-display">
       <div class="display-book" style="background: url('<?php echo $item[7]; ?>'); background-size: cover; 
       		background-position: center; background-repeat: no-repeat;"></div>

@@ -16,6 +16,7 @@
 	$fname = $_SESSION['fname'];
 	$lname = $_SESSION['lname'];
 
+	checkLogin();
 
 ?>
 

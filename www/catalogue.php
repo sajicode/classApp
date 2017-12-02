@@ -18,8 +18,9 @@
 
 	if($_GET['cat_id']) {
 		$cat_id = $_GET['cat_id'];
-	}
-
+  	}
+  
+	checkLogin();
 
 ?>
 

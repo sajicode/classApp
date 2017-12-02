@@ -16,6 +16,8 @@
 	$fname = $_SESSION['fname'];
 	$lname = $_SESSION['lname'];
 
+	checkLogin();
+
 	$errors = [];
 
 	if(array_key_exists('update', $_POST)) {
@@ -73,7 +75,8 @@
         <a href="#"><p>2</p></a>
         <a href="#"><p>3</p></a>
       </div>
-      <a href="checkout.php"><button class="def-button checkout">Checkout</button></a>
+	  <?php $total = getTotal($conn); ?>
+      <a href="checkout.php?tot=<?php echo $total; ?>"><button class="def-button checkout">Checkout</button></a>
     </div>
     
 </div>

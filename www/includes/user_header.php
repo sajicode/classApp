@@ -16,17 +16,17 @@
 			<?php $cat_id = fetchCategory($conn); ?>
 			<li class="top-nav-listItem Home"><a href="home.php">Home</a></li>
 			<li class="top-nav-listItem catalogue"><a href="catalogue.php?cat_id=<?php echo $cat_id[0] ?>">Catalogue</a></li>
-			<li class="top-nav-listItem login"><a href="user_login.php">Login</a></li>
+			<li class="top-nav-listItem login"><a href="user_logout.php">Logout</a></li>
 			<li class="top-nav-listItem register"><a href="user_register.php">Register</a></li>
 			<li class="top-nav-listItem cart">
           	<div class="cart-item-indicator">
-            	<p>12</p>
+            	<p><?php $data = countCartItems($conn); echo $data; ?></p>
           	</div>
           <a href="cart.php">Cart</a>
         </li>
-      </ul>
-      <form class="search-brainfood">
-        <input type="text" class="text-field" placeholder="Search all books">
-      </form>
+      	</ul>
+      	<form class="search-brainfood">
+        	<input type="text" class="text-field" placeholder="Search all books">
+      	</form>
     </div>
   </div>
